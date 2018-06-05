@@ -1,0 +1,23 @@
+var app = angular.module('personal-page');
+
+app.service('person', function() {
+
+	var firstname, lastname, ageinyears, sex;
+
+
+    this.save = function(fname, lname, age, gender) {
+        this.firstname = fname;
+        this.lastname = lname;
+        this.ageinyears = age;
+        this.sex = gender;
+    }
+
+    this.getPerson = function() {
+    	var person = {};
+        person.firstName = this.firstname;
+        person.lastName = this.lastname;
+        person.age = this.ageinyears;
+        person.gender = this.sex;
+        return person;
+    }
+});
