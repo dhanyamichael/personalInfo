@@ -1,0 +1,53 @@
+var app = angular.module('personal-page', ['ngRoute', 'ui.router']);
+
+app.controller('PersonPageCtrl', ['$scope', '$state','person', function ($scope, $state, personService) {
+    $scope.showNextForm = false;
+
+    $scope.next = function(){
+    	console.log($scope.firstName);
+    	console.log($scope.lastName);
+    	$scope.showNextForm = true;
+    };
+
+    $scope.submitForm = function() {
+		personService.save($scope.firstName, $scope.lastName, $scope.age, $scope.gender);
+		$state.go('submit');
+    }
+
+}]);
+
+
+app.controller('PersonalDetailsCtrl', ['$scope', 'person', function ($scope, personService) {
+		
+		$scope.person = personService.getPerson();
+}]);
+
+
+app.config(['$routeProvider', '$stateProvider', '$locationProvider', function ($routeProvider, $stateProvider, $locationProvider) {
+    $stateProvider
+        .state('nameForm', {
+            url: "/",
+            views: {
+                'pageview': {
+                    templateUrl: "partials/personForm.html",
+                    controller: 'PersonPageCtrl'
+                }
+            }
+        })
+        .state('submit', {
+            url: "/",
+            views: {
+                'pageview': {
+                    templateUrl: "partials/personalDetailsPage.html",
+                    controller: 'PersonalDetailsCtrl'
+                }
+            }
+        })
+
+
+	$locationProvider.html5Mode(true);		
+
+}]);
+
+
+

@@ -1,0 +1,16 @@
+<div>
+	<p>Enter your details</p>
+	<form name="person-form" ng-submit="submitForm()">
+		<div ng-hide="showNextForm">
+			First Name: <input type="text" ng-model="firstName"><br>
+			Last Name: <input type="text" ng-model="lastName"><br>
+			<input type="button" class="btn" ng-click="next()" value="Next"></input>
+		</div>
+		<div ng-show="showNextForm">
+			Age: <input type="text" ng-model="age"><br>
+			Gender: <input type="text" ng-model="gender"><br>
+			<input type="submit" class="btn" value="Submit"></input>
+		</div>
+	</form>
+	
+</div>
